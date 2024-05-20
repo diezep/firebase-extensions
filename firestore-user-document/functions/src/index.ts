@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase-admin/app";
-import { getFirestore } from 'firebase-admin/firestore'
 import { UserRecord, getAuth } from "firebase-admin/auth";
 import { getExtensions } from "firebase-admin/extensions";
+import { getFirestore } from "firebase-admin/firestore";
 import { getFunctions } from "firebase-admin/functions";
 import * as functions from "firebase-functions";
 
@@ -9,6 +9,7 @@ import config from "./config";
 
 initializeApp();
 
+const auth = getAuth();
 const db = getFirestore();
 
 const usersCollection = db.collection(config.usersCollectionPath);
@@ -74,7 +75,7 @@ export const backfillExistingUsers = functions.tasks
     }
 
     try {
-      const { users, pageToken } = await getAuth().listUsers(
+      const { users, pageToken } = await auth.listUsers(
         BATCH_SIZE,
         data.pageToken
       );

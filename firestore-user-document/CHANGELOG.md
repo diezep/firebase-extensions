@@ -1,3 +1,7 @@
+## Version 0.0.7
+
+- Fix bugs
+
 ## Version 0.0.6
 
 - Fix bugs

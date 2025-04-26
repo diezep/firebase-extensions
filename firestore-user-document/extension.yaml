@@ -50,7 +50,7 @@ resources:
       eventTrigger:
         eventType: providers/firebase.auth/eventTypes/user.create
         resource: projects/${PROJECT_ID}
-      runtime: "nodejs16"
+      runtime: "nodejs20"
 
   - name: deleteUserDocument
     type: firebaseextensions.v1beta.function
@@ -63,7 +63,7 @@ resources:
       eventTrigger:
         eventType: providers/firebase.auth/eventTypes/user.delete
         resource: projects/${PROJECT_ID}
-      runtime: "nodejs16"
+      runtime: "nodejs20"
 
   - name: backfillExistingUsers
     type: firebaseextensions.v1beta.function

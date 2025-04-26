@@ -1,3 +1,12 @@
+## Version 0.0.8
+
+- Updated `extension.yaml` to standardize runtime format and added a new contributor.
+- Refactored `functions/src/index.ts` for improved clarity and consistency:
+  - Used version-specific imports from `firebase-functions`.
+- Added `package-lock.json` to track dependencies.
+
+
+
 ## Version 0.0.7
 
 - Fix bugs

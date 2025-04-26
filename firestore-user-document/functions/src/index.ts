@@ -3,14 +3,14 @@ import { UserRecord, getAuth } from "firebase-admin/auth";
 import { getExtensions } from "firebase-admin/extensions";
 import { getFirestore } from "firebase-admin/firestore";
 import { getFunctions } from "firebase-admin/functions";
-import * as functions from "firebase-functions";
-
+import { auth } from "firebase-functions/v1";
+import { tasks } from "firebase-functions/v1";
 import config from "./config";
 
 initializeApp();
 
-const auth = getAuth();
 const db = getFirestore();
+const authentication = getAuth();
 
 const usersCollection = db.collection(config.usersCollectionPath);
 
@@ -27,7 +27,7 @@ const getUserDocumentData = (user: UserRecord) => {
   return doc;
 };
 
-export const createUserDocument = functions.auth
+export const createUserDocument = auth
   .user()
   .onCreate(async (user) => {
     const userDocumentRef = usersCollection.doc(user.uid);
@@ -37,7 +37,7 @@ export const createUserDocument = functions.auth
     return userDocumentRef.set(data);
   });
 
-export const deleteUserDocument = functions.auth
+export const deleteUserDocument = auth
   .user()
   .onDelete(async (user) => {
     if (!config.deleteDocumentOnUserDelete) {
@@ -48,7 +48,7 @@ export const deleteUserDocument = functions.auth
 
 const BATCH_SIZE = 100;
 
-export const backfillExistingUsers = functions.tasks
+export const backfillExistingUsers = tasks
   .taskQueue()
   .onDispatch(async (data) => {
     const runtime = getExtensions().runtime();
@@ -75,7 +75,7 @@ export const backfillExistingUsers = functions.tasks
     }
 
     try {
-      const { users, pageToken } = await auth.listUsers(
+      const { users, pageToken } = await authentication.listUsers(
         BATCH_SIZE,
         data.pageToken
       );

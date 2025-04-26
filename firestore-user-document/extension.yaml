@@ -1,5 +1,5 @@
 name: firestore-user-document
-version: 0.0.7
+version: 0.0.8
 specVersion: v1beta
 displayName: Firestore User Document
 
@@ -29,6 +29,9 @@ contributors:
   - authorName: Sandrina
     url: https://sandrina.framer.website
 
+  - authorName: Diego Zepeda
+    email: hello@diezep.com
+
 billingRequired: false
 
 roles:
@@ -50,7 +53,7 @@ resources:
       eventTrigger:
         eventType: providers/firebase.auth/eventTypes/user.create
         resource: projects/${PROJECT_ID}
-      runtime: "nodejs20"
+      runtime: nodejs20
 
   - name: deleteUserDocument
     type: firebaseextensions.v1beta.function
@@ -63,7 +66,7 @@ resources:
       eventTrigger:
         eventType: providers/firebase.auth/eventTypes/user.delete
         resource: projects/${PROJECT_ID}
-      runtime: "nodejs20"
+      runtime: nodejs20
 
   - name: backfillExistingUsers
     type: firebaseextensions.v1beta.function

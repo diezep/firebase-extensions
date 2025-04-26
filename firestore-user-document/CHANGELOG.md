@@ -5,8 +5,6 @@
   - Used version-specific imports from `firebase-functions`.
 - Added `package-lock.json` to track dependencies.
 
-
-
 ## Version 0.0.7
 
 - Fix bugs
